@@ -11,20 +11,20 @@ namespace RotatePdf
         {
             Console.WriteLine("Hello World!");
 
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Shuhei_Nishizawa_不動産売買契約書.PDF");
+            string targetPath = Path.Combine(@"C:\repos\RotatePdf\src\TestData", "PdfRotateTest.pdf");
 
 
-            var reader = Read(path);
+            var reader = Read(targetPath);
 
             int pagesCount = Count(reader);
             Console.WriteLine(pagesCount);
 
             PdfDictionary page = reader.GetPageN(3);
-            PdfNumber rotate = page.GetAsNumber(PdfName.ROTATE);
+            PdfNumber rotate = page.GetAsNumber(PdfName.Rotate);
 
-            page.Put(PdfName.ROTATE, new PdfNumber(rotate == null ? 180 : (rotate.IntValue + 180) % 360));
+            page.Put(PdfName.Rotate, new PdfNumber(rotate == null ? 180 : (rotate.IntValue + 180) % 360));
 
-            string outputPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "output.pdf");
+            string outputPath = Path.Combine(@"C:\repos\RotatePdf\src\TestData", "output.pdf");
 
             using (FileStream fs = new FileStream(outputPath, FileMode.Create, FileAccess.Write, FileShare.None))
             {
