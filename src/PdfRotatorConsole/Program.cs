@@ -26,6 +26,4 @@ namespace PdfRotatorConsole
             pdf.Write(reader, outputPath);
         }
     }
-
-
 }
