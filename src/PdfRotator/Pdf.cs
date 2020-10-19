@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace PdfRotator
 {
@@ -25,6 +26,14 @@ namespace PdfRotator
 
         public int Rotate(int pageNumber, int rotateDegree)
         {
+            int pageCount = _pdfReader.NumberOfPages;
+            if (pageNumber > _pdfReader.NumberOfPages)
+                throw new ArgumentException($"Page number out of range. It must be (1-{pageCount})", "pageNumber");
+
+            var acceptableDegree = new[] { 0, 90, 180, 270, -0, -90, -180, -270 };
+            if (!acceptableDegree.Contains(rotateDegree))
+                throw new ArgumentException($"Rotate degree is not acceptable. It must be (0, 90, 180, 270, -0, -90, -180, -270)", "rotateDegree");
+
             var page = _pdfReader.GetPageN(pageNumber);
             var rotate = page.GetAsNumber(PdfName.Rotate);
 

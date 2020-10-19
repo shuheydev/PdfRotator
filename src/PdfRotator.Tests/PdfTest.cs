@@ -138,6 +138,55 @@ namespace PdfRotator.Tests
                 //Assert
                 Assert.Equal(degree, rotate);
             }
+
+            [Theory]
+            [InlineData(1, 90)]
+            [InlineData(2, -90)]
+            [InlineData(3, 180)]
+            [InlineData(4, -180)]
+            [InlineData(5, 270)]
+            [InlineData(1, -270)]
+            public void 任意のページを任意の方向に回転する(int pageNumber, int rotateDegree)
+            {
+                //Arrange
+                _pdf = new Pdf(_existFilePath);
+
+                //Act
+                _pdf.Rotate(pageNumber, rotateDegree);
+                int rotate = _pdf.GetPageRotate(pageNumber);
+
+                //Assert
+                Assert.Equal(rotateDegree, rotate);
+            }
+
+            [Fact]
+            public void 範囲外のページを指定した場合はpageNumberについてArgumentExceptionをThrowする()
+            {
+                //Arrange
+                _pdf = new Pdf(_existFilePath);
+                int pageNumber = 6;
+                int degree = 90;
+
+                //Assert
+                Assert.Throws<ArgumentException>("pageNumber", () => _pdf.Rotate(pageNumber, degree));
+            }
+
+            [Theory]
+            [InlineData(-1)]
+            [InlineData(-366)]
+            [InlineData(45)]
+            [InlineData(361)]
+            [InlineData(360)]
+            [InlineData(-360)]
+            public void 回転角度degreeが0度90度180度270度及びその負数以外の場合はdegreeについてArgumentExceptionをThrowする(int rotateDegree)
+            {
+                //Arrange
+                _pdf = new Pdf(_existFilePath);
+                int pageNumber = 3;
+
+                //Assert
+                Assert.Throws<ArgumentException>("rotateDegree", () => _pdf.Rotate(pageNumber, rotateDegree));
+            }
         }
 
         public class Read_Tests : PdfTestBase
