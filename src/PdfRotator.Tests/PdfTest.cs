@@ -19,10 +19,12 @@ namespace PdfRotator.Tests
             protected const string _notExistFilePath = "NotExistFile";
             protected string _outputFileName;
             protected string _outputFilePath;
+            protected string _brokenFileName = "PdfRotateTest_Broken.pdf";
+            protected string _brokenFilePath;
+
 
             public void Init(string id)
             {
-                _testDataDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                 _testDataDir = "../../../TestData";
                 if (!Directory.Exists(_testDataDir))
                     throw new DirectoryNotFoundException($"'{_testDataDir}' not found.");
@@ -30,6 +32,10 @@ namespace PdfRotator.Tests
                 _existFilePath = Path.Combine(_testDataDir, _existFileName);
                 if (!File.Exists(_existFilePath))
                     throw new FileNotFoundException($"'{_existFilePath}' not found.");
+
+                _brokenFilePath = Path.Combine(_testDataDir, _brokenFileName);
+                if (!File.Exists(_brokenFilePath))
+                    throw new FileNotFoundException($"'{_brokenFilePath}' not found.");
 
                 _outputFileName = $"{id}_output.pdf";
                 _outputFilePath = Path.Combine(_testDataDir, _outputFileName);
@@ -209,6 +215,13 @@ namespace PdfRotator.Tests
             {
                 //Assert
                 Assert.Throws<FileNotFoundException>(() => new Pdf(_notExistFilePath));
+            }
+
+            [Fact]
+            public void âÛÇÍÇΩPdfÉtÉ@ÉCÉãÇÃì«Ç›çûÇ›Ç…é∏îsÇ∑ÇÈ()
+            {
+                //Assert
+                Assert.Throws<iTextSharp.text.exceptions.InvalidPdfException>(() => new Pdf(_brokenFilePath));
             }
         }
     }
