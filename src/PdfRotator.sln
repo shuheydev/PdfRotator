@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfRotatorConsole", "PdfRot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfRotator", "PdfRotator\PdfRotator.csproj", "{C1DA9F02-65DC-444C-890B-724EF71BE9D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfRotator.Tests", "PdfRotator.Tests\PdfRotator.Tests.csproj", "{2510DA7D-EEA1-4629-BE21-76663D61A0C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C1DA9F02-65DC-444C-890B-724EF71BE9D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1DA9F02-65DC-444C-890B-724EF71BE9D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1DA9F02-65DC-444C-890B-724EF71BE9D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2510DA7D-EEA1-4629-BE21-76663D61A0C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2510DA7D-EEA1-4629-BE21-76663D61A0C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2510DA7D-EEA1-4629-BE21-76663D61A0C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2510DA7D-EEA1-4629-BE21-76663D61A0C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
