@@ -8,11 +8,14 @@ namespace PdfRotator
 {
     public class Pdf
     {
-        private PdfReader _pdfReader;
+        private readonly PdfReader _pdfReader;
 
         public Pdf(string filePath)
         {
-            this.Read(filePath);
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException($"'{filePath}' not found.");
+
+            _pdfReader = new PdfReader(filePath);
         }
 
         public void Write(string outputPath)
@@ -46,15 +49,6 @@ namespace PdfRotator
         {
             int pagesCount = _pdfReader.NumberOfPages;
             return pagesCount;
-        }
-
-        private int Read(string path)
-        {
-            if (!File.Exists(path))
-                throw new FileNotFoundException($"'{path}' not found.");
-
-            _pdfReader = new PdfReader(path);
-            return _pdfReader.NumberOfPages;
         }
 
         public int GetPageRotate(int pageNumber)
