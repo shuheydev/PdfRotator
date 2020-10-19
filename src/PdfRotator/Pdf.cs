@@ -32,7 +32,7 @@ namespace PdfRotator
 
             var acceptableDegree = new[] { 0, 90, 180, 270, -0, -90, -180, -270 };
             if (!acceptableDegree.Contains(rotateDegree))
-                throw new ArgumentException($"Rotate degree is not acceptable. It must be (0, 90, 180, 270, -0, -90, -180, -270)", "rotateDegree");
+                throw new ArgumentException($"Rotate degree is not acceptable. It must be ({string.Join(", ", acceptableDegree)})", "rotateDegree");
 
             var page = _pdfReader.GetPageN(pageNumber);
             var rotate = page.GetAsNumber(PdfName.Rotate);
