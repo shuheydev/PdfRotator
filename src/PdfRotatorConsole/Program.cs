@@ -12,18 +12,17 @@ namespace PdfRotatorConsole
         {
             Console.WriteLine("Hello World!");
 
-            string targetPath = Path.Combine(@"C:\repos\PdfRotator\src\TestData", "PdfRotateTest.pdf");
+            string targetPath = Path.Combine(@"C:\repos\PdfRotator\src\PdfRotator.Tests\TestData", "PdfRotateTest.pdf");
 
-            var pdf = new Pdf();
-            var reader = pdf.Read(targetPath);
+            var pdf = new Pdf(targetPath);
 
-            int pagesCount = pdf.Count(reader);
+            int pagesCount = pdf.Count();
 
-            reader = pdf.Rotate(reader, 3);
+            pdf.Rotate(3, 90);
 
-            string outputPath = Path.Combine(@"C:\repos\PdfRotator\src\TestData", "output.pdf");
+            string outputPath = Path.Combine(@"C:\repos\PdfRotator\src\PdfRotator.Tests\TestData", "output.pdf");
 
-            pdf.Write(reader, outputPath);
+            pdf.Write(outputPath);
         }
     }
 }
