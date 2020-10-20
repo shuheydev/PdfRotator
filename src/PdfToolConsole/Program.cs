@@ -2,13 +2,13 @@
 using System;
 using System.IO;
 using System.Text;
-using PdfRotator;
+using PdfTool;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using ConsoleAppFramework;
-using PdfRotatorConsole.Commands;
+using PdfToolConsole.Commands;
 
-namespace PdfRotatorConsole
+namespace PdfToolConsole
 {
     class Program
     {

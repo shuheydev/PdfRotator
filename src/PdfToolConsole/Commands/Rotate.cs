@@ -1,5 +1,5 @@
 ﻿using ConsoleAppFramework;
-using PdfRotator;
+using PdfTool;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace PdfRotatorConsole.Commands
+namespace PdfToolConsole.Commands
 {
     public class Rotate : ConsoleAppBase
     {

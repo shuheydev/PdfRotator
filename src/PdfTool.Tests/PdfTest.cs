@@ -1,11 +1,11 @@
 using System;
 using Xunit;
-using PdfRotator;
+using PdfTool;
 using System.Reflection;
 using System.IO;
 using System.Runtime.CompilerServices;
 
-namespace PdfRotator.Tests
+namespace PdfTool.Tests
 {
     namespace PdfTests
     {
