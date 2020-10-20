@@ -3,26 +3,18 @@ using System;
 using System.IO;
 using System.Text;
 using PdfRotator;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
+using ConsoleAppFramework;
+using PdfRotatorConsole.Commands;
 
 namespace PdfRotatorConsole
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
-            string targetPath = Path.Combine(@"C:\repos\PdfRotator\src\PdfRotator.Tests\TestData", "PdfRotateTest.pdf");
-
-            var pdf = new Pdf(targetPath);
-
-            int pagesCount = pdf.Count();
-
-            pdf.Rotate(3, 90);
-
-            string outputPath = Path.Combine(@"C:\repos\PdfRotator\src\PdfRotator.Tests\TestData", "output.pdf");
-
-            pdf.Write(outputPath);
+            await Host.CreateDefaultBuilder().RunConsoleAppFrameworkAsync(args);
         }
     }
 }
