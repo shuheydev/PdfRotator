@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PdfRotator\PdfRotator.csproj" />
+    <ProjectReference Include="..\PdfTool\PdfTool.csproj" />
   </ItemGroup>
 
 </Project>

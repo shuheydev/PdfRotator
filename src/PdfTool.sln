@@ -1,13 +1,13 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30608.117
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfRotatorConsole", "PdfRotatorConsole\PdfRotatorConsole.csproj", "{531CB945-DB9B-44CB-ABFB-4735E10DB751}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PdfToolConsole", "PdfToolConsole\PdfToolConsole.csproj", "{531CB945-DB9B-44CB-ABFB-4735E10DB751}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfRotator", "PdfRotator\PdfRotator.csproj", "{C1DA9F02-65DC-444C-890B-724EF71BE9D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfTool", "PdfTool\PdfTool.csproj", "{C1DA9F02-65DC-444C-890B-724EF71BE9D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfRotator.Tests", "PdfRotator.Tests\PdfRotator.Tests.csproj", "{2510DA7D-EEA1-4629-BE21-76663D61A0C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfTool.Tests", "PdfTool.Tests\PdfTool.Tests.csproj", "{2510DA7D-EEA1-4629-BE21-76663D61A0C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
