@@ -224,5 +224,50 @@ namespace PdfTool.Tests
                 Assert.Throws<iTextSharp.text.exceptions.InvalidPdfException>(() => new Pdf(_brokenFilePath));
             }
         }
+
+        public class IsAcceptableDegree_Test : PdfTestBase
+        {
+            [Theory]
+            [InlineData(0)]
+            [InlineData(90)]
+            [InlineData(180)]
+            [InlineData(270)]
+            [InlineData(-90)]
+            [InlineData(-180)]
+            [InlineData(-270)]
+            public void ˆø”‚ÉintŒ^‚Ìã‹L’l‚ğ—^‚¦‚½‚çTrue‚ª•Ô‚é(int degree)
+            {
+                //Assert
+                Assert.True(Pdf.IsAcceptableDegree(degree));
+            }
+
+            [Theory]
+            [InlineData("0")]
+            [InlineData("90")]
+            [InlineData("180")]
+            [InlineData("270")]
+            [InlineData("-90")]
+            [InlineData("-180")]
+            [InlineData("-270")]
+            public void ˆø”‚ÉstringŒ^‚Ìã‹L’l‚ğ—^‚¦‚½‚çTrue‚ª•Ô‚é(string degree)
+            {
+                //Assert
+                Assert.True(Pdf.IsAcceptableDegree(degree));
+            }
+
+            [Theory]
+            [InlineData(-1)]
+            [InlineData(91)]
+            [InlineData(222)]
+            [InlineData(360)]
+            [InlineData(-93)]
+            [InlineData(-181)]
+            [InlineData(-360)]
+            public void ˆø”‚É0_90_180_270‹y‚Ñ‚»‚Ì•‰”ˆÈŠO‚ğ—^‚¦‚½‚çFalse‚ª•Ô‚é(int degree)
+            {
+                //Assert
+                Assert.False(Pdf.IsAcceptableDegree(degree));
+            }
+        }
     }
 }

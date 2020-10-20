@@ -27,15 +27,17 @@ namespace PdfTool
             }
         }
 
+        private static readonly int[] _acceptableDegree = { 0, 90, 180, 270, -0, -90, -180, -270 };
+
         public int Rotate(int pageNumber, int rotateDegree)
         {
             int pageCount = _pdfReader.NumberOfPages;
             if (pageNumber > _pdfReader.NumberOfPages)
                 throw new ArgumentException($"Page number out of range. It must be (1-{pageCount})", "pageNumber");
 
-            var acceptableDegree = new[] { 0, 90, 180, 270, -0, -90, -180, -270 };
-            if (!acceptableDegree.Contains(rotateDegree))
-                throw new ArgumentException($"Rotate degree is not acceptable. It must be ({string.Join(", ", acceptableDegree)})", "rotateDegree");
+
+            if (!_acceptableDegree.Contains(rotateDegree))
+                throw new ArgumentException($"Rotate degree is not acceptable. It must be ({string.Join(", ", _acceptableDegree)})", "rotateDegree");
 
             var page = _pdfReader.GetPageN(pageNumber);
             var rotate = page.GetAsNumber(PdfName.Rotate);
@@ -57,6 +59,30 @@ namespace PdfTool
             var rotate = page.GetAsNumber(PdfName.Rotate);
 
             return rotate is null ? 0 : rotate.IntValue;
+        }
+
+        public static bool IsAcceptableDegree(int degree)
+        {
+            if (_acceptableDegree.Contains(degree))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool IsAcceptableDegree(string degree)
+        {
+            if (int.TryParse(degree, out int degreeInt))
+            {
+                return IsAcceptableDegree(degreeInt);
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
