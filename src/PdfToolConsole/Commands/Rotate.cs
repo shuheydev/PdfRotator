@@ -1,11 +1,9 @@
 ﻿using ConsoleAppFramework;
 using PdfTool;
+using PdfTool.Helpers;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace PdfToolConsole.Commands
@@ -30,7 +28,7 @@ namespace PdfToolConsole.Commands
 
             if (string.IsNullOrEmpty(output))
             {
-                if (ConfirmOverWrite() == false)
+                if (ConfirmationHelper.OverWrite() == false)
                 {
                     Console.WriteLine("Exit");
                     return;
@@ -85,7 +83,7 @@ namespace PdfToolConsole.Commands
 
             if (string.IsNullOrEmpty(output))
             {
-                if (ConfirmOverWrite() == false)
+                if (ConfirmationHelper.OverWrite() == false)
                 {
                     Console.WriteLine("Exit");
                     return;
@@ -125,25 +123,6 @@ namespace PdfToolConsole.Commands
         private string TrimDirection(string direction)
         {
             return Regex.Replace(direction, @"\s+", "");
-        }
-
-        private bool ConfirmOverWrite()
-        {
-            Console.Write("Over write input pdf file? [y/n] : ");
-
-            while (true)
-            {
-                string input = Console.ReadLine().Trim();
-
-                if (Regex.IsMatch(input, @"^(y|yes)$", RegexOptions.IgnoreCase))
-                {
-                    return true;
-                }
-                if (Regex.IsMatch(input, @"^(n|no)$", RegexOptions.IgnoreCase))
-                {
-                    return false;
-                }
-            }
         }
     }
 }
