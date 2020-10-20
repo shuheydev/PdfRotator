@@ -1,4 +1,5 @@
-﻿using iTextSharp.text.pdf;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System;
 using System.IO;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace PdfTool
         public int Rotate(int pageNumber, int rotateAngle)
         {
             //Make sure the pageNumber is in the valid range
-            int pageCount = _pdfReader.NumberOfPages;
+            int pageCount = Count();
             if (pageNumber > pageCount || pageNumber < 1)
             {
                 throw new ArgumentException($"Page number out of range. It must be (1-{pageCount})", "pageNumber");
@@ -102,6 +103,22 @@ namespace PdfTool
             {
                 return false;
             }
+        }
+
+        public void Select(params int[] pageNumbers)
+        {
+            if (!pageNumbers.Any())
+            {
+                throw new ArgumentException("Page must be selected.", "pageNumbers");
+            }
+
+            int pageCount = Count();
+            if (pageNumbers.Any(n => n > pageCount || n < 1))
+            {
+                throw new ArgumentException($"Page number out of range. It must be (1-{pageCount})", "pageNumbers");
+            }
+
+            _pdfReader.SelectPages(string.Join(",", pageNumbers));
         }
     }
 }

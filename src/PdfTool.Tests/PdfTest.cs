@@ -286,5 +286,84 @@ namespace PdfTool.Tests
                 Assert.False(Pdf.IsAcceptableAngle(angle));
             }
         }
+
+        public class Select_Test : PdfTestBase
+        {
+            public Select_Test()
+            {
+                Init(nameof(Select_Test));
+            }
+
+            [Fact]
+            public void PDFから3ページ分選択したらページ数は3()
+            {
+                //Arrange
+                _pdf = new Pdf(_existFilePath);
+
+                //Act
+                _pdf.Select(1, 3, 5);
+                var actual = _pdf.Count();
+
+                //Assert
+                Assert.Equal(3, actual);
+            }
+
+            [Fact]
+            public void PDFから4ページ分選択したらページ数は4()
+            {
+                //Arrange
+                _pdf = new Pdf(_existFilePath);
+
+                //Act
+                _pdf.Select(1, 3, 5);
+                var actual = _pdf.Count();
+
+                //Assert
+                Assert.Equal(3, actual);
+            }
+
+            [Theory]
+            [InlineData(1)]
+            [InlineData(1, 2)]
+            [InlineData(1, 2, 3)]
+            [InlineData(1, 2, 3, 4)]
+            [InlineData(1, 2, 3, 4, 5)]
+            public void 選択したページの数を返す(params int[] pageNumbers)
+            {
+                //Arrange
+                _pdf = new Pdf(_existFilePath);
+
+                //Act
+                _pdf.Select(pageNumbers);
+                int actual = _pdf.Count();
+                int expected = pageNumbers.Length;
+
+                //Assert
+                Assert.Equal(expected, actual);
+            }
+
+            [Fact]
+            public void PDFのページよりも大きいページを指定した場合にArgumentExceptionを投げる()
+            {
+                //Arrange
+                _pdf = new Pdf(_existFilePath);
+                int[] targets = { 1, 3, 6 };
+
+                //Act
+                //Assert
+                Assert.Throws<ArgumentException>("pageNumbers", () =>_pdf.Select(targets));
+            }
+
+            [Fact]
+            public void Selectメソッドに引数を指定しなかった場合()
+            {
+                //Arrange
+                _pdf = new Pdf(_existFilePath);
+
+                //Act
+                //Assert
+                Assert.Throws<ArgumentException>("pageNumbers", () => _pdf.Select());
+            }
+        }
     }
 }
