@@ -13,7 +13,7 @@ namespace PdfToolConsole.Commands
     public class Select : ConsoleAppBase
     {
         public void Pages([Option(0, "pdf file path")] string filePath,
-                          [Option(1, "num1,num2,num3,...")] int[] pageNumbers,
+                          [Option(1, "num1,num2,num3,...")] string[] pageNumbers,
                           [Option("o", "c")] string output = "")
         {
             Console.WriteLine("Hello");
@@ -45,7 +45,7 @@ namespace PdfToolConsole.Commands
             {
                 var pdf = new Pdf(filePath);
 
-                pdf.Select(pageNumbers);
+                pdf.Select(PageNumberHelper.ToInt(pageNumbers));
 
                 pdf.Write(output);
             }
@@ -54,5 +54,6 @@ namespace PdfToolConsole.Commands
                 Console.WriteLine("Something wrong.");
             }
         }
+
     }
 }

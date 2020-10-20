@@ -100,8 +100,14 @@ namespace PdfToolConsole.Commands
 
                 foreach (var d in directions.Select(d => TrimDirection(d)))
                 {
-                    var pageAndDegree = d.Split(':').Select(e => int.Parse(e)).ToList();
-                    pdf.Rotate(pageAndDegree[0], pageAndDegree[1]);
+                    var pageAndAngle = d.Split(':');
+                    var pages = PageNumberHelper.ToInt(pageAndAngle[0]);
+                    var angle = int.Parse(pageAndAngle[1]);
+
+                    foreach (var p in pages)
+                    {
+                        pdf.Rotate(p, angle);
+                    }
                 }
 
                 pdf.Write(output);
@@ -114,8 +120,10 @@ namespace PdfToolConsole.Commands
 
         private bool ValidateDirection(string[] directions)
         {
+            string validPattern = @"^(\d+|\d+-\d+):(-)?\d+$";
+
             bool result = directions.Select(d => TrimDirection(d))
-                .All(d => Regex.IsMatch(d, @"^\d+:(-)?\d+$"));
+                .All(d => Regex.IsMatch(d, validPattern));
 
             return result;
         }
