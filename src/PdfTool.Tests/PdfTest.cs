@@ -89,8 +89,8 @@ namespace PdfTool.Tests
                 //Arrange
                 _pdf = new Pdf(_existFilePath);
                 int pageNumber = 1;
-                int degree = -90;
-                _pdf.Rotate(pageNumber, degree);
+                int angle = -90;
+                _pdf.Rotate(pageNumber, angle);
 
                 //Act
                 _pdf.Write(_outputFilePath);
@@ -98,7 +98,7 @@ namespace PdfTool.Tests
                 //Assert
                 Assert.True(File.Exists(_outputFilePath));
                 var pdf = new Pdf(_outputFilePath);
-                Assert.Equal(degree, pdf.GetPageRotate(pageNumber));
+                Assert.Equal(angle, pdf.GetPageAngle(pageNumber));
             }
         }
 
@@ -110,44 +110,44 @@ namespace PdfTool.Tests
             }
 
             [Fact]
-            public void ページ1の向きdegreeは0()
+            public void ページ1の向きangleは0()
             {
                 //Arrange
                 _pdf = new Pdf(_existFilePath);
                 //Assert
-                Assert.Equal(0, _pdf.GetPageRotate(1));
+                Assert.Equal(0, _pdf.GetPageAngle(1));
             }
 
             [Fact]
-            public void ページ1を右に90degree回転する()
+            public void ページ1を右に90angle回転する()
             {
                 //Arrange
                 _pdf = new Pdf(_existFilePath);
                 int pageNumber = 1;
-                int degree = 90;
+                int angle = 90;
 
                 //Act
-                _pdf.Rotate(pageNumber, degree);
-                int rotate = _pdf.GetPageRotate(pageNumber);
+                _pdf.Rotate(pageNumber, angle);
+                int rotate = _pdf.GetPageAngle(pageNumber);
 
                 //Assert
-                Assert.Equal(degree, rotate);
+                Assert.Equal(angle, rotate);
             }
 
             [Fact]
-            public void ページ1を左に90degree回転する()
+            public void ページ1を左に90angle回転する()
             {
                 //Arrange
                 _pdf = new Pdf(_existFilePath);
                 int pageNumber = 1;
-                int degree = -90;
+                int angle = -90;
 
                 //Act
-                _pdf.Rotate(pageNumber, degree);
-                int rotate = _pdf.GetPageRotate(pageNumber);
+                _pdf.Rotate(pageNumber, angle);
+                int rotate = _pdf.GetPageAngle(pageNumber);
 
                 //Assert
-                Assert.Equal(degree, rotate);
+                Assert.Equal(angle, rotate);
             }
 
             [Theory]
@@ -157,29 +157,41 @@ namespace PdfTool.Tests
             [InlineData(4, -180)]
             [InlineData(5, 270)]
             [InlineData(1, -270)]
-            public void 任意のページを任意の方向に回転する(int pageNumber, int rotateDegree)
+            public void 任意のページを任意の方向に回転する(int pageNumber, int rotateAngle)
             {
                 //Arrange
                 _pdf = new Pdf(_existFilePath);
 
                 //Act
-                _pdf.Rotate(pageNumber, rotateDegree);
-                int rotate = _pdf.GetPageRotate(pageNumber);
+                _pdf.Rotate(pageNumber, rotateAngle);
+                int rotate = _pdf.GetPageAngle(pageNumber);
 
                 //Assert
-                Assert.Equal(rotateDegree, rotate);
+                Assert.Equal(rotateAngle, rotate);
             }
 
             [Fact]
-            public void 範囲外のページを指定した場合はpageNumberについてArgumentExceptionをThrowする()
+            public void PDFファイルのページ数より大きなページを指定した場合はpageNumberについてArgumentExceptionをThrowする()
             {
                 //Arrange
                 _pdf = new Pdf(_existFilePath);
                 int pageNumber = 6;
-                int degree = 90;
+                int angle = 90;
 
                 //Assert
-                Assert.Throws<ArgumentException>("pageNumber", () => _pdf.Rotate(pageNumber, degree));
+                Assert.Throws<ArgumentException>("pageNumber", () => _pdf.Rotate(pageNumber, angle));
+            }
+
+            [Fact]
+            public void ページに1未満を指定した場合はpageNumberについてArgumentExceptionをThrowする()
+            {
+                //Arrange
+                _pdf = new Pdf(_existFilePath);
+                int pageNumber = 0;
+                int angle = 90;
+
+                //Assert
+                Assert.Throws<ArgumentException>("pageNumber", () => _pdf.Rotate(pageNumber, angle));
             }
 
             [Theory]
@@ -189,14 +201,14 @@ namespace PdfTool.Tests
             [InlineData(361)]
             [InlineData(360)]
             [InlineData(-360)]
-            public void 回転角度degreeが0度90度180度270度及びその負数以外の場合はdegreeについてArgumentExceptionをThrowする(int rotateDegree)
+            public void 回転角度angleが0度90度180度270度及びその負数以外の場合はangleについてArgumentExceptionをThrowする(int rotateAngle)
             {
                 //Arrange
                 _pdf = new Pdf(_existFilePath);
                 int pageNumber = 3;
 
                 //Assert
-                Assert.Throws<ArgumentException>("rotateDegree", () => _pdf.Rotate(pageNumber, rotateDegree));
+                Assert.Throws<ArgumentException>("rotateAngle", () => _pdf.Rotate(pageNumber, rotateAngle));
             }
         }
 
@@ -230,7 +242,7 @@ namespace PdfTool.Tests
             }
         }
 
-        public class IsAcceptableDegree_Test : PdfTestBase
+        public class IsAcceptableAngle_Test : PdfTestBase
         {
             [Theory]
             [InlineData(0)]
@@ -240,10 +252,10 @@ namespace PdfTool.Tests
             [InlineData(-90)]
             [InlineData(-180)]
             [InlineData(-270)]
-            public void 引数にint型の上記値を与えたらTrueが返る(int degree)
+            public void 引数にint型の上記値を与えたらTrueが返る(int angle)
             {
                 //Assert
-                Assert.True(Pdf.IsAcceptableDegree(degree));
+                Assert.True(Pdf.IsAcceptableAngle(angle));
             }
 
             [Theory]
@@ -254,10 +266,10 @@ namespace PdfTool.Tests
             [InlineData("-90")]
             [InlineData("-180")]
             [InlineData("-270")]
-            public void 引数にstring型の上記値を与えたらTrueが返る(string degree)
+            public void 引数にstring型の上記値を与えたらTrueが返る(string angle)
             {
                 //Assert
-                Assert.True(Pdf.IsAcceptableDegree(degree));
+                Assert.True(Pdf.IsAcceptableAngle(angle));
             }
 
             [Theory]
@@ -268,10 +280,10 @@ namespace PdfTool.Tests
             [InlineData(-93)]
             [InlineData(-181)]
             [InlineData(-360)]
-            public void 引数に0_90_180_270及びその負数以外を与えたらFalseが返る(int degree)
+            public void 引数に0_90_180_270及びその負数以外を与えたらFalseが返る(int angle)
             {
                 //Assert
-                Assert.False(Pdf.IsAcceptableDegree(degree));
+                Assert.False(Pdf.IsAcceptableAngle(angle));
             }
         }
     }
