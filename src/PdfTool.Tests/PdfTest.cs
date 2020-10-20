@@ -1,9 +1,6 @@
 using System;
-using Xunit;
-using PdfTool;
-using System.Reflection;
 using System.IO;
-using System.Runtime.CompilerServices;
+using Xunit;
 
 namespace PdfTool.Tests
 {
@@ -27,15 +24,21 @@ namespace PdfTool.Tests
             {
                 _testDataDir = "../../../TestData";
                 if (!Directory.Exists(_testDataDir))
+                {
                     throw new DirectoryNotFoundException($"'{_testDataDir}' not found.");
+                }
 
                 _existFilePath = Path.Combine(_testDataDir, _existFileName);
                 if (!File.Exists(_existFilePath))
+                {
                     throw new FileNotFoundException($"'{_existFilePath}' not found.");
+                }
 
                 _brokenFilePath = Path.Combine(_testDataDir, _brokenFileName);
                 if (!File.Exists(_brokenFilePath))
+                {
                     throw new FileNotFoundException($"'{_brokenFilePath}' not found.");
+                }
 
                 _outputFileName = $"{id}_output.pdf";
                 _outputFilePath = Path.Combine(_testDataDir, _outputFileName);
@@ -44,7 +47,9 @@ namespace PdfTool.Tests
             public void Dispose()
             {
                 if (File.Exists(_outputFilePath))
+                {
                     File.Delete(_outputFilePath);
+                }
             }
         }
 

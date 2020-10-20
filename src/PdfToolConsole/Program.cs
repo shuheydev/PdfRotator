@@ -1,12 +1,6 @@
-﻿using iTextSharp.text.pdf;
-using System;
-using System.IO;
-using System.Text;
-using PdfTool;
-using System.Threading.Tasks;
+﻿using ConsoleAppFramework;
 using Microsoft.Extensions.Hosting;
-using ConsoleAppFramework;
-using PdfToolConsole.Commands;
+using System.Threading.Tasks;
 
 namespace PdfToolConsole
 {

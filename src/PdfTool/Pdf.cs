@@ -1,6 +1,5 @@
 ﻿using iTextSharp.text.pdf;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -13,7 +12,9 @@ namespace PdfTool
         public Pdf(string filePath)
         {
             if (!File.Exists(filePath))
+            {
                 throw new FileNotFoundException($"'{filePath}' not found.");
+            }
 
             _pdfReader = new PdfReader(filePath);
         }
@@ -33,11 +34,14 @@ namespace PdfTool
         {
             int pageCount = _pdfReader.NumberOfPages;
             if (pageNumber > _pdfReader.NumberOfPages)
+            {
                 throw new ArgumentException($"Page number out of range. It must be (1-{pageCount})", "pageNumber");
+            }
 
-
-            if (!_acceptableDegree.Contains(rotateDegree))
+            if (!IsAcceptableDegree(rotateDegree))
+            {
                 throw new ArgumentException($"Rotate degree is not acceptable. It must be ({string.Join(", ", _acceptableDegree)})", "rotateDegree");
+            }
 
             var page = _pdfReader.GetPageN(pageNumber);
             var rotate = page.GetAsNumber(PdfName.Rotate);
