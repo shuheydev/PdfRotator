@@ -28,8 +28,6 @@ namespace PdfTool
             }
         }
 
-        private static readonly int[] _acceptableDegree = { 0, 90, 180, 270, -0, -90, -180, -270 };
-
         public int Rotate(int pageNumber, int rotateDegree)
         {
             int pageCount = _pdfReader.NumberOfPages;
@@ -64,6 +62,8 @@ namespace PdfTool
 
             return rotate is null ? 0 : rotate.IntValue;
         }
+
+        private static readonly int[] _acceptableDegree = { 0, 90, 180, 270, -0, -90, -180, -270 };
 
         public static bool IsAcceptableDegree(int degree)
         {
