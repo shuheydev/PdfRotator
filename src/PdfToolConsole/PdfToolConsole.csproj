@@ -3,10 +3,19 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackageId>PdfToolCli</PackageId>
+    <PackageTags>PDF</PackageTags>
+    <PackageProjectUrl>https://github.com/shuheydev/PdfTool</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/shuheydev/PdfTool.git</RepositoryUrl>
+    <Authors>Haru Soft</Authors>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>pdftool</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <AssemblyName>PdfToolCli</AssemblyName>
+    <Version>1.0.1</Version>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <ItemGroup>
