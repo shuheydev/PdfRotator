@@ -20,7 +20,7 @@ $ pdftool rotate all <PdfFilePath> <Angle>
 |Argument|Description|
 |--|--|
 |```PdfFilePath```|Target PDF file path.|
-|```Angle```|Rotate right: 90, 180, 270. Rotate left -90, -180, -270|
+|```Angle```|Rotate right: 90, 180, 270. Rotate left: -90, -180, -270.|
 
 #### Options
 
