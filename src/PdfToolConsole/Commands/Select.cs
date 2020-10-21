@@ -12,7 +12,7 @@ namespace PdfToolConsole.Commands
 {
     public class Select : ConsoleAppBase
     {
-        [Command("pages","Select the specified pages from pdf and save to file.")]
+        [Command("pages", "Select the specified pages from pdf and save to file.")]
         public void Pages([Option(0, "pdf file path")] string filePath,
                           [Option(1, "num1,num2,num3,...")] string[] pageNumbers,
                           [Option("o", "output file")] string output = "")

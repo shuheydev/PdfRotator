@@ -17,7 +17,10 @@ namespace PdfTool
                 throw new FileNotFoundException($"'{filePath}' not found.");
             }
 
-            _pdfReader = new PdfReader(filePath);
+            var tempFilePath = Path.GetTempFileName();
+            File.Copy(filePath, tempFilePath, true);
+
+            _pdfReader = new PdfReader(tempFilePath);
         }
 
         public void Write(string outputPath)
