@@ -98,15 +98,18 @@ namespace PdfToolConsole.Commands
             {
                 var pdf = new Pdf(filePath);
 
-                foreach (var d in directions.Select(d => TrimDirection(d)))
+                foreach (var d in directions)
                 {
-                    var pageAndAngle = d.Split(':');
-                    var pages = PageNumberHelper.ToInt(pageAndAngle[0]);
-                    var angle = int.Parse(pageAndAngle[1]);
+                    var trimed = TrimDirection(d);
 
-                    foreach (var p in pages)
+                    (string page, string angle) = SplitPageAndAngle(trimed);
+
+                    var pageInt = PageNumberHelper.ToInt(page);
+                    var angleInt = int.Parse(angle);
+
+                    foreach (var p in pageInt)
                     {
-                        pdf.Rotate(p, angle);
+                        pdf.Rotate(p, angleInt);
                     }
                 }
 
@@ -116,6 +119,16 @@ namespace PdfToolConsole.Commands
             {
                 Console.WriteLine("Something wrong.");
             }
+        }
+
+        private (string page, string angle) SplitPageAndAngle(string pageAndAngle)
+        {
+            var splitted = pageAndAngle.Split(':');
+
+            var page = splitted[0];
+            var angle = splitted[1];
+
+            return (page, angle);
         }
 
         private bool ValidateDirection(string[] directions)

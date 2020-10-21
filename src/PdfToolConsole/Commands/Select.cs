@@ -14,7 +14,7 @@ namespace PdfToolConsole.Commands
     {
         public void Pages([Option(0, "pdf file path")] string filePath,
                           [Option(1, "num1,num2,num3,...")] string[] pageNumbers,
-                          [Option("o", "c")] string output = "")
+                          [Option("o", "output file")] string output = "")
         {
             Console.WriteLine("Hello");
             Console.WriteLine(filePath);
