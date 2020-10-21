@@ -42,7 +42,7 @@ namespace PdfTool
             //Make sure the rotateAngle is valid(0,90,180,270,-90,-180,-270).
             if (!IsAcceptableAngle(rotateAngle))
             {
-                throw new ArgumentException($"Rotate degree is not acceptable. It must be ({string.Join(", ", _acceptableAngle)})", "rotateAngle");
+                throw new ArgumentException($"Rotate angle is not acceptable. It must be ({string.Join(", ", _acceptableAngle)})", "rotateAngle");
             }
 
             //Rotate the page!

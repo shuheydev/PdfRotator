@@ -14,10 +14,10 @@ namespace PdfToolConsole.Commands
         /// routing command: rotate all
         /// </summary>
         public void All([Option(0, "pdf file path")] string filePath,
-                        [Option(1, "degree")] int degree,
+                        [Option(1, "angle")] int angle,
                         [Option("o", "output file path")] string output = "")
         {
-            Console.WriteLine($"rotate all.({degree})");
+            Console.WriteLine($"rotate all.({angle})");
 
             //check file exist?
             if (!File.Exists(filePath))
@@ -45,7 +45,7 @@ namespace PdfToolConsole.Commands
 
                 for (int pageNum = 1; pageNum <= pageCount; pageNum++)
                 {
-                    pdf.Rotate(pageNum, degree);
+                    pdf.Rotate(pageNum, angle);
                 }
 
                 pdf.Write(output);
@@ -61,7 +61,7 @@ namespace PdfToolConsole.Commands
         /// </summary>
         /// <param></param>
         public void Pages([Option(0, "pdf file path")] string filePath,
-                          [Option(1, "pageNum1:degree1,pageNum2:degree2,...")] string[] directions,
+                          [Option(1, "pageNum1:angle1,pageNum2:angle2,...")] string[] directions,
                           [Option("o", "output file path")] string output = "")
         {
             Console.WriteLine($"rotate pages.({filePath},{string.Join("_", directions)})");
