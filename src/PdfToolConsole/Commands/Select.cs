@@ -24,21 +24,19 @@ namespace PdfToolConsole.Commands
             //check file exist?
             if (File.Exists(filePath) == false)
             {
-                Console.WriteLine($"'{filePath}': No such file.");
+                Console.WriteLine($"The file '{filePath}' not found.");
                 return;
             }
 
             if (string.IsNullOrEmpty(output))
             {
-                if (ConfirmationHelper.OverWrite() == false)
-                {
-                    Console.WriteLine("Exit");
-                    return;
-                }
-                else
-                {
-                    output = filePath;
-                }
+                output = filePath;
+            }
+
+            if (ConfirmationHelper.OverWrite(output) == false)
+            {
+                Console.WriteLine("Exit");
+                return;
             }
 
             try
