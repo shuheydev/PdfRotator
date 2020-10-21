@@ -12,16 +12,11 @@ namespace PdfToolConsole.Commands
 {
     public class Select : ConsoleAppBase
     {
-        [Command("select pages","Select the specified pages from pdf and save to file.")]
+        [Command("pages","Select the specified pages from pdf and save to file.")]
         public void Pages([Option(0, "pdf file path")] string filePath,
                           [Option(1, "num1,num2,num3,...")] string[] pageNumbers,
                           [Option("o", "output file")] string output = "")
         {
-            Console.WriteLine("Hello");
-            Console.WriteLine(filePath);
-            Console.WriteLine(string.Join("_", pageNumbers));
-            Console.WriteLine(output);
-
             //check file exist?
             if (File.Exists(filePath) == false)
             {

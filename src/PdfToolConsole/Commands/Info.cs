@@ -9,7 +9,7 @@ namespace PdfToolConsole.Commands
 {
     public class Info : ConsoleAppBase
     {
-        [Command("info count","Show page count of the pdf file.")]
+        [Command("count","Show page count of the pdf file.")]
         public void Count([Option(0, "")] string filePath)
         {
             //check file exist?

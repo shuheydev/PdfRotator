@@ -8,11 +8,11 @@ namespace PdfTool.Helpers
     {
         public static bool OverWrite(string filePath)
         {
-            Console.WriteLine($"The file '{Path.GetFileName(filePath)}' already exists.");
-            Console.Write("Over write input pdf file? [y/n] : ");
-
             while (true)
             {
+                Console.WriteLine($"The file '{Path.GetFileName(filePath)}' already exists.");
+                Console.Write("Over write input pdf file? [y/n] : ");
+
                 string input = Console.ReadLine().Trim();
 
                 if (Regex.IsMatch(input, @"^(y|yes)$", RegexOptions.IgnoreCase))
