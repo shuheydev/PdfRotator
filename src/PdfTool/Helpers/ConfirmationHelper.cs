@@ -8,10 +8,10 @@ namespace PdfTool.Helpers
     {
         public static bool OverWrite(string filePath)
         {
-            if(!File.Exists(filePath))
+            if (!File.Exists(filePath))
             {
                 return true;
-            }    
+            }
 
             while (true)
             {
