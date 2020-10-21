@@ -1,4 +1,5 @@
 # PdfToolCli
+[![NuGet version](https://badge.fury.io/nu/pdftoolcli.svg)](https://badge.fury.io/nu/pdftoolcli)
 
 PdfToolCli is the command line tool that simply rotate and select pages in PDF documents.
 
