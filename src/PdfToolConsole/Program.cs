@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using PdfToolConsole.Commands;
 using System;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace PdfToolConsole

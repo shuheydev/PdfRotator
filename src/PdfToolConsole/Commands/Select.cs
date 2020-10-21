@@ -49,7 +49,7 @@ namespace PdfToolConsole.Commands
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Something wrong.");
+                Console.WriteLine($"{ex.Message}");
             }
         }
 
