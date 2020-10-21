@@ -6,6 +6,7 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>pdftool</ToolCommandName>
     <PackageOutputPath>./nupkg</PackageOutputPath>
+    <AssemblyName>PdfToolCli</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

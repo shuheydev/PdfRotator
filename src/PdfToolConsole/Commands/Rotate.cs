@@ -13,6 +13,7 @@ namespace PdfToolConsole.Commands
         /// <summary>
         /// routing command: rotate all
         /// </summary>
+        [Command("rotate all","Rotate all pages.")]
         public void All([Option(0, "pdf file path")] string filePath,
                         [Option(1, "angle")] int angle,
                         [Option("o", "output file path")] string output = "")
@@ -60,6 +61,7 @@ namespace PdfToolConsole.Commands
         /// routing command: rotate pages
         /// </summary>
         /// <param></param>
+        [Command("rotate pages","Rotate the specified pages.")]
         public void Pages([Option(0, "pdf file path")] string filePath,
                           [Option(1, "pageNum1:angle1,pageNum2:angle2,...")] string[] directions,
                           [Option("o", "output file path")] string output = "")
