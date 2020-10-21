@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace PdfTool
 {
-    public class Pdf
+    public class Pdf : IDisposable
     {
         private readonly PdfReader _pdfReader;
 
@@ -23,12 +23,19 @@ namespace PdfTool
             _pdfReader = new PdfReader(tempFilePath);
         }
 
-        public void Write(string outputPath)
+        public void Write(string filePath)
         {
-            using (FileStream fs = new FileStream(outputPath, FileMode.Create, FileAccess.Write, FileShare.None))
+            try
             {
-                PdfStamper stamper = new PdfStamper(_pdfReader, fs);
-                stamper.Close();
+                using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
+                {
+                    PdfStamper stamper = new PdfStamper(_pdfReader, fs);
+                    stamper.Close();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
@@ -122,6 +129,11 @@ namespace PdfTool
             }
 
             _pdfReader.SelectPages(string.Join(",", pageNumbers));
+        }
+
+        public void Dispose()
+        {
+            _pdfReader.Close();
         }
     }
 }
