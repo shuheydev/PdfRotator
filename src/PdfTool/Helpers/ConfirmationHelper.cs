@@ -8,6 +8,11 @@ namespace PdfTool.Helpers
     {
         public static bool OverWrite(string filePath)
         {
+            if(!File.Exists(filePath))
+            {
+                return true;
+            }    
+
             while (true)
             {
                 Console.WriteLine($"The file '{Path.GetFileName(filePath)}' already exists.");
