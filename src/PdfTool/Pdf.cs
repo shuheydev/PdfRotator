@@ -1,5 +1,6 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
+using PdfTool.Common;
 using System;
 using System.IO;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace PdfTool
     public class Pdf : IDisposable
     {
         private readonly PdfReader _pdfReader;
+        private readonly TemporaryFile _tempFile;
 
         public Pdf(string filePath)
         {
@@ -17,7 +19,10 @@ namespace PdfTool
                 throw new FileNotFoundException($"'{filePath}' not found.");
             }
 
-            var tempFilePath = Path.GetTempFileName();
+            //temporary file will be automatically deleted.
+            _tempFile = new TemporaryFile();
+            string tempFilePath = _tempFile.FullName;
+
             File.Copy(filePath, tempFilePath, true);
 
             _pdfReader = new PdfReader(tempFilePath);
@@ -133,6 +138,7 @@ namespace PdfTool
 
         public void Dispose()
         {
+            _tempFile.Dispose();
             _pdfReader.Close();
         }
     }

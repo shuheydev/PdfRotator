@@ -37,7 +37,7 @@ namespace PdfToolConsole.Commands
 
             try
             {
-                var pdf = new Pdf(filePath);
+                using var pdf = new Pdf(filePath);
 
                 pdf.Select(PageNumberHelper.ToInt(pageNumbers));
 
