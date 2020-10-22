@@ -38,7 +38,7 @@ namespace PdfToolConsole.Commands
 
             try
             {
-                var pdf = new Pdf(filePath);
+                using var pdf = new Pdf(filePath);
 
                 int pageCount = pdf.Count();
 
@@ -90,7 +90,7 @@ namespace PdfToolConsole.Commands
 
             try
             {
-                var pdf = new Pdf(filePath);
+                using var pdf = new Pdf(filePath);
 
                 foreach (var d in directions)
                 {
