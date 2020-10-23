@@ -351,7 +351,7 @@ namespace PdfTool.Tests
 
                 //Act
                 //Assert
-                Assert.Throws<ArgumentException>("pageNumbers", () =>_pdf.Select(targets));
+                Assert.Throws<ArgumentException>("pageNumbers", () => _pdf.Select(targets));
             }
 
             [Fact]
@@ -363,6 +363,63 @@ namespace PdfTool.Tests
                 //Act
                 //Assert
                 Assert.Throws<ArgumentException>("pageNumbers", () => _pdf.Select());
+            }
+        }
+
+        public class GetPageAngle_Test : PdfTestBase
+        {
+            public GetPageAngle_Test()
+            {
+                Init(nameof(GetPageAngle_Test));
+            }
+
+            [Fact]
+            public void Page1の角度は0度()
+            {
+                //Arrange
+                _pdf = new Pdf(_existFilePath);
+
+                //Act
+                int actual = _pdf.GetPageAngle(1);
+                int expected = 0;
+
+                //Assert
+                Assert.Equal(expected, actual);
+            }
+
+            [Fact]
+            public void Page1を右に90度回転させたあとは90度()
+            {
+                //Arrange
+                _pdf = new Pdf(_existFilePath);
+                _pdf.Rotate(1, 90);
+
+                //Act
+                int actual = _pdf.GetPageAngle(1);
+                int expected = 90;
+
+                //Assert
+                Assert.Equal(expected, actual);
+            }
+
+            [Theory]
+            [InlineData(1, 90)]
+            [InlineData(2, 180)]
+            [InlineData(3, -90)]
+            [InlineData(4, -180)]
+            [InlineData(5, -270)]
+            public void 指定したページをX度回転させたあとはX度(int pageNumber, int angle)
+            {
+                //Arrange
+                _pdf = new Pdf(_existFilePath);
+                _pdf.Rotate(pageNumber, angle);
+
+                //Act
+                int actual = _pdf.GetPageAngle(pageNumber);
+                int expected = angle;
+
+                //Assert
+                Assert.Equal(expected, actual);
             }
         }
     }
