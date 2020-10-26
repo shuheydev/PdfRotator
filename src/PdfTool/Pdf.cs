@@ -2,6 +2,7 @@
 using iTextSharp.text.pdf;
 using PdfTool.Common;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -134,6 +135,58 @@ namespace PdfTool
             }
 
             _pdfReader.SelectPages(string.Join(",", pageNumbers));
+        }
+
+        public Pdf Merge(params Pdf[] pdfs)
+        {
+            if (!pdfs.Any())
+            {
+                throw new ArgumentException("Param need at least 1 Pdf object.", "pdfs");
+            }
+
+            var pageSize = GetPageSize(1);
+
+            //Document -> PdfWriter
+            var doc = new Document(pageSize);
+            using var tempFile = new TemporaryFile();
+            using var fs = new FileStream(tempFile.FullName, FileMode.Create);
+            var writer = PdfWriter.GetInstance(doc, fs);
+            doc.Open();
+
+            var allPdfs = new List<Pdf>();
+            allPdfs.Add(this);
+            allPdfs.AddRange(pdfs);
+
+            foreach (var pdf in allPdfs)
+            {
+                int pageCount = pdf.Count();
+                var reader = pdf.GetReader();
+                for (int i = 1; i <= pageCount; i++)
+                {
+                    //PdfWriter -> Document
+                    var page = writer.GetImportedPage(reader, i);
+                    doc.Add(Image.GetInstance(page));
+                }
+            }
+
+            doc.Close();
+
+            return new Pdf(tempFile.FullName);
+        }
+
+        public PdfDictionary GetPage(int pageNumber)
+        {
+            return _pdfReader.GetPageN(pageNumber);
+        }
+
+        public Rectangle GetPageSize(int pageNumber)
+        {
+            return _pdfReader.GetPageSize(pageNumber);
+        }
+
+        public PdfReader GetReader()
+        {
+            return _pdfReader;
         }
 
         public void Dispose()
