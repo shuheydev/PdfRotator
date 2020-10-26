@@ -13,7 +13,6 @@ namespace PdfToolConsole.Commands
         public void Files([Option(0, "pdf file path:path1,path2,path3,....")] string[] files,
                           [Option("o", "output file path")] string output = "")
         {
-            Console.WriteLine($"{string.Join("_", files)}");
             if (files.Length < 2)
             {
                 Console.WriteLine("Specify at least 2 files");

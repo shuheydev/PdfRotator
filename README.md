@@ -109,3 +109,64 @@ or
 $ pdftool select pages MyPdf.pdf 1-3,5 -o output.pdf
 ```
 
+## Info
+### Show PDF file information
+
+Show information about target PDF document.
+
+### Syntax
+
+```
+$ pdftool info count <PdfFilePath>
+```
+
+|Argument|Description|
+|--|--|
+|```PdfFilePath```|Target PDF file path.|
+
+#### Options
+
+No options.
+
+#### Example
+
+Show page count of target PDF document.
+
+```
+$ pdftool info count MyPdf.pdf
+```
+
+result
+
+```
+'MyPdf.pdf' has 10 pages.
+```
+
+## Merge
+### Merge multiple PDF files
+
+Merge multiple PDF files and save.
+
+### Syntax
+
+```
+$ pdftool merge files <PdfFilePath1,PdfFilePath2,PdfFilePath3,...>
+```
+
+|Argument|Description|
+|--|--|
+|```List of PdfFilePath```|Comma separated list of target files you want to merge.|
+#### Options
+
+|Otion|Function|
+|--|--|
+|```-o```, ```--output```|Output file path that you want to save to.|
+
+#### Example
+
+Merge 3 PDF files(MyPdf1.pdf, MyPdf2.pdf and MyPdf3.pdf) and save it to output.pdf.
+
+```
+$ pdftool merge files MyPdf1.pdf,MyPdf2.pdf,MyPdf3.pdf -o output.pdf
+```
+
