@@ -9,8 +9,8 @@ namespace PdfToolConsole.Commands
 {
     public class Merge : ConsoleAppBase
     {
-        [Command("files", "merge pdf files")]
-        public void Files([Option(0, "pdf file path:path1,path2,path3,....")] string[] files,
+        [Command("files", "Merge pdf files")]
+        public void Files([Option(0, "pdf file path1,path2,path3,....")] string[] files,
                           [Option("o", "output file path")] string output = "")
         {
             if (files.Length < 2)
