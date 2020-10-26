@@ -471,5 +471,54 @@ namespace PdfTool.Tests
                 Assert.Equal(expected, actual);
             }
         }
+
+        public class Merge_Test : PdfTestBase
+        {
+            public Merge_Test()
+            {
+                Init(nameof(Merge_Test));
+            }
+
+            [Fact]
+            public void 同じ5ページのPDFファイルを2つ渡すとページ数は10になる()
+            {
+                //Arrange     
+                string pdfPath1 = _existFilePath;
+                string pdfPath2 = _existFilePath;
+                _pdf = new Pdf(pdfPath1);
+                using Pdf pdf2 = new Pdf(pdfPath2);
+                int expected = 10;
+
+                //Act
+                using var newPdf = _pdf.Merge(pdf2);
+                int actual = newPdf.Count();
+
+                //Assert
+                Assert.Equal(expected, actual);
+            }
+
+            [Fact]
+            public void 同じ5ページのPDFファイルを3つ渡すとページ数は15になる()
+            {
+                //Arrange     
+                string pdfPath1 = _existFilePath;
+                string pdfPath2 = _existFilePath;
+                string pdfPath3 = _existFilePath;
+
+                _pdf = new Pdf(pdfPath1);
+
+                using Pdf pdf2 = new Pdf(pdfPath2);
+
+                using Pdf pdf3 = new Pdf(pdfPath3);
+                int expected = 15;
+
+                //Act
+                using var newPdf = _pdf.Merge(new Pdf[] { pdf2, pdf3 });
+                int actual = newPdf.Count();
+
+                //Assert
+                Assert.Equal(expected, actual);
+            }
+        }
     }
 }
